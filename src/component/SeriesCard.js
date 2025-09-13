@@ -12,7 +12,7 @@ export const SeriesCard = ({ id, name, rating, deleteSeries, onEdit }) => {
     deleteSeries(id);
   };
 
-  const handleEdit = (series) => {
+  const handleEdit = () => {
     setIsModalOpen(true);
   };
 
