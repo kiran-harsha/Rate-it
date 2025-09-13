@@ -1,15 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import {FormControl, InputLabel, OutlinedInput, Button} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 export const AddNewSeriesModal = ({id, open, onClose, addToSeries}) => {
+    console.log("ID",id);
     const [subject, setSubject] = useState({
-        id: id,
+        id: "",
         name: "",
         rating: ""
     });
+
+    useEffect(() => {
+        if (id) {
+            setSubject((prev) => ({ ...prev, id: id }));
+        }
+    }, [id]);
 
     const handleModalSubmission = () => {
     addToSeries(subject);

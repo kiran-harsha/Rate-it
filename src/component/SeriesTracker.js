@@ -6,11 +6,15 @@ import { AddNewSeriesModal } from './AddNewSeriesModal';
 
 export const SeriesTracker = () => {
     const [series, setSeries] = useState([]);
+    const [nextId, setNextId] = useState(1);
+console.log("Series:", series);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 const addSeries = (newSeries) => {
 
-    setSeries((prevSeries) => [...prevSeries, newSeries]);}
+    setSeries((prevSeries) => [...prevSeries, newSeries]);
+    setNextId((prevId) => prevId + 1);
+}
 
 
       const deleteSeries = (seriesToDelete) => {
@@ -22,10 +26,11 @@ const addSeries = (newSeries) => {
       const editSeries = (updatedSeries) => {
         setSeries((prevSeries) =>
           prevSeries.map((item) =>
-            item.id === updatedSeries.id ? { ...item, ...updatedSeries } : item
+            item.id === updatedSeries.id ? updatedSeries : item
           )
         );
       };
+      
       
       
     const handleAddReviewClick = () => {
@@ -42,7 +47,7 @@ const addSeries = (newSeries) => {
             <SeriesCard key={item.id} {...item} deleteSeries={deleteSeries} onEdit={editSeries}/>
           ))}
           <AddNewSeriesModal 
-          id={series.length + 1}
+          id={nextId}
           open = {isModalOpen}
           onClose={() => setIsModalOpen(false)}
           addToSeries = {addSeries}/>
